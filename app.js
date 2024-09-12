@@ -87,3 +87,14 @@ app.get('/history', auth, async (req, res) => {
 });
 
 server.listen(5000, () => console.log('Server running on port 5000'));
+
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+
+app.post('/profile', auth, upload.single('profilePicture'), async (req, res) => {
+    const user = await User.findOne({ username: req.user.username });
+    user.profilePicture = req.file.path;
+    user.bio = req.body.bio || user.bio;
+    await user.save();
+    res.json({ message: 'Profile updated' });
+});
