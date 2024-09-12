@@ -1,0 +1,11 @@
+.chat-window {
+  max-width: 600px;
+  margin: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .chat-window {
+    max-width: 100%;
+    padding: 10px;
+  }
+}
